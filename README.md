@@ -49,4 +49,6 @@
 5.		created objects and instantiated them like
 MobileNumberUtils p = new MobileNumberUtils();	
         return enquiriesService.enquire(partnerCode, p.formatMobileToInternationalMode(msisdn));
+	
+6. Used Jacoco for test coverage
 

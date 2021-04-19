@@ -1,9 +1,10 @@
 package com.econetwireless.epay.business.integrations.impl;
 
 import com.econetwireless.epay.business.integrations.api.ChargingPlatform;
+
 import com.econetwireless.epay.business.utils.MessageConverters;
 import com.econetwireless.in.webservice.CreditRequest;
-import com.econetwireless.in.webservice.IntelligentNetworkService;
+import com.econetwireless.epay.business.config.IntelligentNetworkService;
 import com.econetwireless.utils.pojo.INBalanceResponse;
 import com.econetwireless.utils.pojo.INCreditRequest;
 import com.econetwireless.utils.pojo.INCreditResponse;
@@ -21,12 +22,14 @@ public class ChargingPlatformImpl implements ChargingPlatform{
 
     @Override
     public INBalanceResponse enquireBalance(final String partnerCode, final String msisdn) {
-        return MessageConverters.convert(intelligentNetworkService.enquireBalance(partnerCode, msisdn));
+        return new INBalanceResponse();
+        	//MessageConverters.convert(intelligentNetworkService.enquireBalance(partnerCode, msisdn));
     }
 
     @Override
     public INCreditResponse creditSubscriberAccount(final INCreditRequest inCreditRequest) {
         final CreditRequest creditRequest = MessageConverters.convert(inCreditRequest);
-        return MessageConverters.convert(intelligentNetworkService.creditSubscriberAccount(creditRequest));
+        return new INCreditResponse();
+        		//MessageConverters.convert(intelligentNetworkService.creditSubscriberAccount(creditRequest));
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**

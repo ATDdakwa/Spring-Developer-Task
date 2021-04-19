@@ -10,13 +10,14 @@ import org.slf4j.LoggerFactory;
  */
 public class MobileNumberUtils {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(MobileNumberUtils.class);
+    @SuppressWarnings("unused")
+	private Logger LOGGER = LoggerFactory.getLogger(MobileNumberUtils.class);
 
-    private MobileNumberUtils() {
+    public MobileNumberUtils() {
 
     }
 
-    public static String formatMobileNumber(final String mobileNumber) {
+    public String formatMobileNumber(final String mobileNumber) {
         String newMobileNumber = removeAllSpaces( mobileNumber);
         final String invalidMobileNumberMessage = "Invalid Mobile Number Supplied";
         if (newMobileNumber.length() > 9) {
@@ -37,7 +38,7 @@ public class MobileNumberUtils {
             throw new InvalidMobileNumberException(ResponseCode.INVALID_REQUEST, invalidMobileNumberMessage);
         }
     }
-    private static String trimMobile(String mobileNumber) {
+    private String trimMobile(String mobileNumber) {
         if(canTrimMobile(mobileNumber)) {
             return mobileNumber.substring(mobileNumber.length() - 9);
         }
@@ -45,32 +46,32 @@ public class MobileNumberUtils {
 
     }
 
-    private static boolean canTrimMobile(String mobileNumber) {
+    private boolean canTrimMobile(String mobileNumber) {
        if(mobileNumber.startsWith("0") && mobileNumber.length() == 10) {
             return true;
         }
         return canTrimMobileWithCountryCode(mobileNumber);
     }
 
-    private static boolean canTrimMobileWithCountryCode(String mobileNumber) {
+    private boolean canTrimMobileWithCountryCode(String mobileNumber) {
         final boolean is00263Format = mobileNumber.startsWith("00263") && mobileNumber.length() == 14;
         final boolean is263Format = mobileNumber.startsWith("263") && mobileNumber.length() == 12;
         final boolean isPlus263Format = mobileNumber.startsWith("+263") && mobileNumber.length() == 13;
         return is00263Format || is263Format || isPlus263Format;
     }
-    public static String formatMobileToInternationalMode(String mobileNumber) throws InvalidMobileNumberException {
+    public  String formatMobileToInternationalMode(String mobileNumber) throws InvalidMobileNumberException {
         return "263"+formatMobileNumber(mobileNumber);
     }
 
-    public static boolean isNumeric(final String str) {
+    public boolean isNumeric(final String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
 
-    private static String removeAllSpaces(final String msisdn) {
+    private String removeAllSpaces(final String msisdn) {
         return msisdn.replaceAll(" ", "");
     }
 
-    public static void main(String[] args) {
+    public  void main(String[] args) {
         try {
             LOGGER.info(">>>>> 1. Result : "+formatMobileNumber("785898366"));
             LOGGER.info(">>>>> 2. Result : "+formatMobileNumber("0785898366"));
@@ -83,7 +84,7 @@ public class MobileNumberUtils {
         }
     }
 
-    public static boolean isInitiatorSameAsBeneficiary(String initiatorMobileNumber, String beneficiaryMobileNumber) {
+    public  boolean isInitiatorSameAsBeneficiary(String initiatorMobileNumber, String beneficiaryMobileNumber) {
         try {
             return formatMobileNumber(initiatorMobileNumber).equalsIgnoreCase(formatMobileNumber(beneficiaryMobileNumber));
         } catch (InvalidMobileNumberException e) {

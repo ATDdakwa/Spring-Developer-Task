@@ -23,12 +23,16 @@ public class EpayRequestProcessorImpl implements EpayRequestProcessor{
 
     @Override
     public AirtimeBalanceResponse enquireAirtimeBalance(final String partnerCode, final String msisdn) {
-        return enquiriesService.enquire(partnerCode, MobileNumberUtils.formatMobileToInternationalMode(msisdn));
+    	
+    	MobileNumberUtils p = new MobileNumberUtils();	
+        return enquiriesService.enquire(partnerCode, p.formatMobileToInternationalMode(msisdn));
+        
     }
 
     @Override
-    public AirtimeTopupResponse creditAirtime(final AirtimeTopupRequest airtimeTopupRequest) {
-        airtimeTopupRequest.setMsisdn(MobileNumberUtils.formatMobileToInternationalMode(airtimeTopupRequest.getMsisdn()));
+    public  AirtimeTopupResponse creditAirtime(final AirtimeTopupRequest airtimeTopupRequest) {
+    	MobileNumberUtils p = new MobileNumberUtils();	
+        airtimeTopupRequest.setMsisdn(p.formatMobileToInternationalMode(airtimeTopupRequest.getMsisdn()));
         return creditsService.credit(airtimeTopupRequest);
     }
 }

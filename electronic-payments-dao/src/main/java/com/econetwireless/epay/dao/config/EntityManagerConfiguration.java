@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
-import javax.annotation.Resource;
+
 import javax.sql.DataSource;
 import java.util.Properties;
 
